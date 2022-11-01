@@ -1,0 +1,656 @@
+<html >
+<style>
+html{margin:0px;}
+body{background-color:transparent;color:#DDE5EA;font-family:sans-serif;font-size:22px;overflow:hidden;cursor:none;
+}
+@font-face {font-family:'Icons';font-style:normal;font-weight:900;src: local('Icons'), url(Icons.ttf) format('truetype');
+}
+.Icon{background:linear-gradient(to bottom left,rgba(40,40,40,.5),rgba(00,00,00,.7),rgba(00,00,00,.7),rgba(40,40,40,.5));background-size:100% 100%;background-repeat:no-repeat;cursor:none;
+}
+.LoadingTXT {
+position:absolute;
+left:330px;
+top:145px;
+height:60px;
+text-align:center;
+font-weight:bold;
+font-size:28px;
+text-shadow: -2px 2px #274478;
+line-height:27px;
+letter-spacing:3px;
+padding:3 0 0 0;
+z-index:100;
+}
+.settings{
+position:relative;top:3px;display:inline-block;vertical-align:top;background-size:100%;
+border:0px solid #BBCEEF;border-radius:15px;
+width:20px;height:20px;
+margin:6px 2px 0 2px;
+line-height:20px;font-family:'Icons';font-size:20px;text-align:center;color:white;
+}
+#MenuSelection{
+position:absolute;overflow:hidden;display:inline-block;white-space:nowrap;
+top:10px;left:45px;
+width:96%;height:70px;
+}
+.But0{/* unselected */
+background:none;border:none;color:white;font-size:25px;font-weight:bold;opacity:.4;
+border:3px solid transparent;border-radius:5px;
+padding:4px 14px 6px 14px;
+display:inline-block;
+}
+.But2{/* current */
+background:none;color:white;font-size:25px;font-weight:bold;
+border:3px solid transparent;border-radius:5px;
+padding:4px 14px 6px 14px;
+display:inline-block;
+}
+.But0:hover {
+background:rgba(40,40,40,.3);color:white;font-size:25px;font-weight:bold;
+border:3px solid #C0BEBE;border-radius:5px;
+padding:4px 14px 6px 14px;opacity:1;
+}
+.But2:hover {
+background:rgba(40,40,40,.3);color:white;font-size:25px;font-weight:bold;
+border:3px solid #C0BEBE;border-radius:5px;
+padding:4px 14px 6px 14px;opacity:1;
+}
+#aGH{
+position:fixed;left:60px;bottom:10px;
+font-weight:bolder;z-index:1;text-align:left;
+font-size:24px;color:white;text-shadow:-2px 2px #274478;	
+}
+#PassFail{
+position:fixed;right:10px;bottom:10px;
+font-size:18px;font-weight:bold;z-index:1;text-shadow:-1px 1px #646468;text-align:right;
+z-index:901;
+}
+.Info1{
+position:absolute;top:264px;left:75px;font-size:24px;color:white;text-shadow:-2px 2px #274478;
+}
+#InfoBox{
+position:absolute;top:400px;left:60px;display:inline-block;
+text-shadow: -2px 2px #274478;
+width:900px;height:300px;color:white;
+}
+#InfoTitle{
+position:relative;top:0;left:0;
+height:58px;color:white;font-size:42px;font-weight:bolder;overflow:hidden;white-space:nowrap;
+}
+#InfoVerAuth{
+position:relative;top:0;left:0;
+height:40px;color:white;font-size:24px;font-weight:bold;overflow:hidden;white-space:nowrap;
+}
+#InfoDesc{
+position:relative;top:0;left:0;
+font-size:24px;overflow:hidden;
+}
+.InfoIcon{transition:all 200ms;
+position:relative;top:6px;display:inline-block;background-size:100%;margin:0 10px 0 10px;
+border:3px solid transparent;box-shadow:0 0 0 3px #C0BEBE;border-radius:18px;background-clip:content-box;
+width:168px;height:168px;
+line-height:168px;font-family:'Icons';font-size:90px;text-align:center;color:white;
+text-shadow:-3px 3px 5px black;
+}
+#CacheProgress {
+position:fixed;left:0;right:0;top:0;bottom:30px;max-width:100%;max-height:100%;margin:auto;
+width:1076px;height:8px;
+background-color:transparent;border:3px solid #afc1de;box-shadow: -4px 2px 5px 0px rgba(0,0,0,0.49);border-radius:3px;
+}
+#CacheBar {
+width:0%;height:100%;background-color:white;
+}
+.cacheUPDbg {transition:opacity 1000ms;
+position:fixed;left:0;right:0;top:0;bottom:0;max-width:100%;max-height:100%;margin:auto;	
+width:100%;height:100%;
+background:url("img/BG.jpg");
+opacity:1;display:none;z-index:900;
+}
+.cacheUPDtext {
+position:absolute;left:0;top:318px;width:100%;margin:auto;	
+height:400px;
+line-height:30px;align-items:left;
+font-family:sans-serif;font-size:28px;text-align:center;color:white;z-index:901;text-shadow: -2px 2px #274478;
+}
+*:focus{outline:0;
+}
+extra{position:absolute;Right:10px;top:3px;font-size:22%;margin-top:37%;font-family:sans-serif;
+}
+img{width:100%;-webkit-filter: drop-shadow(-3px 3px 5px black);
+}
+.Loader{transition:opacity 300ms;
+position:absolute;left:237px;top:381px;overflow:hidden;	
+width:265px;height:56px;
+z-index:99;
+opacity:1;
+}
+.MenuContainer{transition:height 200ms;
+position:absolute;overflow:hidden;display:inline-block;z-index:9;white-space:nowrap;
+top:80px;left:-40px;
+width:102.5%;height:420px;
+}
+.MenuClass{transition:left 400ms;
+position:absolute;left:-40px;top:0px;height:170px;padding-left:100px;
+}
+.MenuClass2{transition:opacity 300ms;
+position:absolute;left:-40px;top:0px;height:170px;padding-left:100px;opacity:0;
+}
+.Box{transition:all 200ms;
+position:relative;top:3px;display:inline-block;vertical-align:top;background-size:100%;
+border:0px solid #BBCEEF;border-radius:15px;
+width:106px;height:106px;
+margin:6px 2px 0 2px;
+line-height:106px;font-family:'Icons';font-size:50px;text-align:center;color:white;
+text-shadow:-3px 3px 5px black;
+}
+.SelectedItem{transition:all 200ms;
+position:relative;top:6px;display:inline-block;background-size:100%;margin:0 10px 0 10px;
+border:3px solid transparent;box-shadow:0 0 0 3px #C0BEBE;border-radius:18px;background-clip:content-box;
+width:168px;height:168px;
+line-height:168px;font-family:'Icons';font-size:90px;text-align:center;color:white;
+text-shadow:-3px 3px 5px black;
+}
+.SelectedItem2{
+position:relative;top:6px;display:inline-block;background-size:100%;margin:0 10px 0 10px;
+border:3px solid transparent;box-shadow:0 0 0 3px transparent;border-radius:18px;background-clip:content-box;
+width:168px;height:168px;
+line-height:168px;font-family:'Icons';font-size:90px;text-align:center;color:white;
+text-shadow:-3px 3px 5px black;
+}
+.Title{transition:top 100ms, opacity 100ms;
+position:absolute;font-size:25px;font-weight:normal;overflow:hidden;white-space:nowrap;
+top:200px;left:335px;width:950px;height:57px;opacity:1;
+}
+.NoTitle{transition:top 100ms, opacity 100ms;
+position:absolute;font-size:25px;font-weight:normal;overflow:hidden;white-space:nowrap;
+top:200px;left:335px;width:950px;height:57px;opacity:0;
+}
+.TitleAnim{transition:top 100ms, opacity 200ms;
+position:absolute;font-size:25px;font-weight:normal;overflow:hidden;white-space:nowrap;
+top:200px;left:335px;width:950px;height:57px;opacity:0;
+}
+#Popup {
+position:absolute;left:-600px;height:90px;margin-top:-9px;
+background-color:white; 
+box-shadow:5px 2px 20px 1px black;	
+}
+#Popup.animation {
+animation-name:PopupAni;
+animation-duration:6s;
+}
+@keyframes PopupAni {
+0%{left:-600px; top:10px;} 8%{left:0px; top:10px;} 90%{left:0px; top:10px;} 100%{left:-600px; top:10px;}
+}
+#PopIcon {
+position:absolute;left:85px;top:50%;width:60px;height:60px; 
+transform: translateY(-50%);
+/* background:url("PopUp.png"); */
+}
+#PopTitle {
+padding:10px 0 6px 0;margin-left:160px; margin-right:32px; 
+font-size:25px;font-weight:lighter;color:black; 
+}
+#BottomPopup {overflow:hidden;z-index:2;
+position:fixed;left:0;right:0;bottom:-250px;width:99%;height:210px;margin-left:8px;
+cursor:pointer;background:rgba(40,40,40,1);box-shadow:0 0 15px 1px black;
+border-style:solid;border-width:2px 2px 0 1px;border-radius:18px 18px 0 0;
+}
+#BottomPopup.animation {
+animation-name:BottomPopupAni;animation-duration:600ms;animation-fill-mode: forwards;
+}
+@keyframes BottomPopupAni {
+from{bottom:-250px;}to{bottom:0px;}
+}
+#navFix0{border:0px solid black;
+position:fixed;left:0;right:0;top:0;bottom:500px;max-width:100%;max-height:100%;margin:auto;overflow:hidden;width:1200px;height:1px;cursor:none;
+}
+#navFix1{border:0px solid red;
+position:fixed;left:3px;right:0;top:0;bottom:0;max-width:100%;max-height:100%;margin:auto;overflow:hidden;width:1px;height:1px;cursor:none;
+}
+#navFix2{border:0px solid green;
+position:fixed;left:0;right:3px;top:0;bottom:0;max-width:100%;max-height:100%;margin:auto;overflow:hidden;width:1px;height:1px;cursor:none;
+}
+#navFix3{border:0px solid white;
+position:fixed;left:0;right:0;top:0;bottom:400px;max-width:100%;max-height:100%;margin:auto;overflow:hidden;width:1200px;height:1px;cursor:none;
+}
+#Popup {
+position:absolute;left:-600px;height:90px;margin-top:-9px;
+background-color:white; 
+box-shadow:5px 2px 20px 1px black;	
+}
+        .notification {
+            top: 4%;
+            right: 2%;
+            position: fixed;
+            background-color: rgba(30, 30, 50, 0.5);
+            color: rgb(255, 255, 255);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px;
+            font-weight: bold;
+            animation: slide 500ms;
+        }
+        @keyframes slide {
+            from {
+                transform: translateX(120%);
+            }
+            to {
+                transform: translateX(0%);
+            }
+        }
+        .notification2 {
+            top: 4%;
+            right: 2%;
+            position: fixed;
+            background-color: rgba(30, 30, 50, 0.5);
+            color: rgb(255, 255, 255);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px;
+            font-weight: bold;
+            animation: slide2 500ms;
+        }
+        @keyframes slide2 {
+            from {
+                transform: translateX(0%);
+            }
+            to {
+                transform: translateX(120%);
+            }
+        }
+h1 {
+text-shadow: 0.1em 0.1em 0.2em black;
+font-size: 25px;
+text-align: center;
+color: white;
+}
+</style>
+<head>
+<title>Leeful PS-Phive!(Mod Esp32s2 Fw 9.00) By 84Ciss</title>
+<script>
+UA=navigator.userAgent.substring(navigator.userAgent.indexOf("6.72 (") + 28,navigator.userAgent.indexOf(") Apple"));
+if (UA=="layStation 4/9.00")UA="9.00";
+if (UA!="9.00")alert("This Is For PS4 FW9.00 Only!");
+
+        function ani2() {
+            document.getElementById('notify').className = 'notification2'
+            setTimeout(hide, 400)
+        }
+        function hide() {
+            document.getElementById('notify').style.display = 'none'
+        }
+
+function GHBLScheck(){
+ var req = new XMLHttpRequest();
+ req.open("GET", "https://127.0.0.1:9090/status");
+ req.send();
+ req.onload = function(){sessionStorage.ghbls = "yes";GHBLS.innerHTML="GoldHEN BinLoader Server";}
+ req.onerror = function(){sessionStorage.ghbls = "no";GHBLS.innerHTML="Webkit";}
+}
+GHBLScheck();
+</script>
+</head>
+<body>
+
+<div id=PassFail>Detected Firmware Version: v<span id=FWver></span><br>Exploit Stats: Pass = <span id=passCounter></span>&nbsp;&nbsp;:&nbsp;&nbsp;Fail = <span id=failCounter></span><br>Auto Load GoldHEN : <span id=aGHyn></span><br>Payload Method: <span id=GHBLS></span></div>
+
+<div id=ScrOverlay class=cacheUPDbg><pre id=cacheUPDtxt class=cacheUPDtext></pre><div id=CacheProgress><div id=CacheBar></div></div></div>
+<div id=Loader class=Loader></div>
+
+<div id=MenuSelection onmouseenter=SetMenuButton()>
+<div class=but2> Main </div>&nbsp;&nbsp;
+<div class=but0> Game Mods </div>&nbsp;&nbsp;
+<div class=but0> Tools </div>&nbsp;&nbsp;
+<div class=but0> Backup & Restore </div>&nbsp;&nbsp;
+<div class=but0> Dumper </div>&nbsp;&nbsp;
+</div>
+
+<div id=MenuContainer class=MenuContainer onclick=LoadPL()>
+
+<div id=MainMenu class=MenuClass style=display:block>
+<div  PL-Title="Main Menu"     PL-Bin="INFO"           PL-Ver="Menu Info:"                                                PL-Desc="Contains payloads to exploit and run homebrew on <br>your 9.00 firmware PS4.<br>Other payloads that are frequently used can also be found<br>here like FTP and Bin Loader." class="Box Icon">&#xf30f;</div
+><div PL-Title="GoldHEN"       PL-Bin="GoldHENv2.2.5b7.bin"    PL-Ver="By SiSTRo"   LoadedMSG="GoldHEN v2.2.5b7 Loaded !!!"                                              PL-Desc="<b>* PRESS R1 TO CHANGE VERSION *<br>* PRESS L1 TO SET AutoLoad After Exploit ON/OFF *</b><br>Homebrew Enabler, Enable Debug Settings, PSVR Support,<br>External HDD Support, Remote PKG Installer Support,<br>Full Rest Mode Support, Debug Trophies Support, Enable UART,<br>Enable Blocked Screenshots, FTP Server on port 2121,<br>BinLoader Server on port 9090."  class="Box Icon"><img src="hen.svg"></div
+><div PL-Title="PlatinumHEN"   PL-Bin="henplatinum2.bin" PL-Ver="v2.5beta - By 84Ciss"   LoadedMSG="PlatinumHen-Unofficial v2.5 Beta Loaded !!!"              PL-Desc="Enable Homebrew, Enable Debug Settings, Enable Update Blocker,<br>Enable External HDD Support, PSVR Support , Remote PKG Installer Support, 9.xx External HDD Support,<br>Full Rest Mode Support, Debug Trophies Support, Enable UART,<br>Enable Blocked Screenshots."  class="Box Icon"><img src="hen.svg"></div
+><div PL-Title="Bin Loader"    PL-Bin="BINLOADER"      PL-Ver="v1.0 - By Specter"                                         PL-Desc="Loads a bin or elf file sent to the PS4 IP address on port 9020.<br>Netcat or Netcat GUI is recommended to send the files to the PS4." class="Box Icon">&#xf019;</div
+></div>
+
+<div id=ModMenu class=MenuClass style=display:none>
+<div  PL-Title="Game Mods Menu"                    PL-Bin="INFO"                    PL-Ver="Menu Info:"                                PL-Desc="Contains Mod Menus and Trainers for PS4 Games.<br><br>GTA V Mod Menus are compatable with different update versions of the game." class="Box Icon">&#xf30f;</div
+><div PL-Title="PS4 Trainer (WebRTE)"              PL-Bin="webrte.bin"              PL-Ver="v1.0 - By PS4 Trainer / 9.00 Port By Karo" LoadedMSG="WebRte Loaded !!!" PL-Desc="Run payload then go to ps4trainer.com/Trainer/index.html<br>on any device to use trainers." class="Box Icon">&#xf108;</div
+><div PL-Title="Oysters Menu For RDR 2 v1.29"      PL-Bin="OystersMenu129.bin"      PL-Ver="v1.3.6 - By RF0oDxM0Dz"  LoadedMSG="Read Dead Redemption II OystersMod(1.3.7) 1.29 Loaded"                  PL-Desc="Mod Menu for RDR 2<br>*Game version 1.29.<br><br>Activate Menu With: 'D-Pad Right + Square'" class="Box Icon">&#xf63b;</div
+><div PL-Title="BeefQueefMod Menu For GTA V v1.38" PL-Bin="BeefQueefMod138.bin"     PL-Ver="v1.0 - By GraFfiX_221211"   LoadedMSG="Beefqueef Mod Menu 1.38 Loaded !!!"               PL-Desc="Mod Menu for GTA V<br>*Game update v1.38 must be installed.<br><br>Activate Menu With: 'D-Pad Right + Square'" class="Box Icon">&#xf5e1;</div
+><div PL-Title="Lamance Menu For GTA V v1.38"      PL-Bin="Lamance.bin"             PL-Ver="v1.38 - By david1337hax"    LoadedMSG="Gta V Lamance 1.38 Mod Menu v1.0 Loaded !!!"               PL-Desc="Mod Menu for GTA V<br>*Game update v1.38 must be installed.<br><br>Activate Menu With: 'D-Pad Right + Square'" class="Box Icon">&#xf5e1;</div
+></div>
+
+<div id=ToolsMenu class=MenuClass style=display:none>
+<div  PL-Title="Tools Menu"      PL-Bin="INFO"                  PL-Ver="Menu Info:"                                                 PL-Desc="Contains tools to do various tasks and change things on your PS4." class="Box Icon">&#xf30f;</div
+><div PL-Title="PS4Debug"        PL-Bin="ps4debug.bin"       PL-Ver="v1.0.15 - By CTN"      LoadedMSG="PS4Debug v1.0.15  Loaded !!!"                                    PL-Desc="PS4Debug for SaveMounter and Profile Activator." class="Box Icon">&#xf188;</div
+><div PL-Title="Orbis Toolbox"   PL-Bin="OrbisToolbox.bin" PL-Ver="v1190 Alpha - By OSM-Made"    LoadedMSG="Orbis-Toolbox Loaded !!!"                             PL-Desc="A modification of the playstation UI to help with<br>launching and developing homebrew.." class="Box Icon">&#xf0b1;</div
+></div>
+
+<div id=BackupMenu class=MenuClass style=display:none>
+<div  PL-Title="Backup & Restore Menu"     PL-Bin="INFO"            PL-Ver="Menu Info:"       PL-Desc="** More payloads will be added here soon... **<br>Contains various payloads to backup all aspect of useful things on your PS4.<br><br>NOTE! These backups will only work on your current Profile and accountID!<br>If you plan to initialize or replace your HDD you must also make a backup of your existing profile using the official backup/restore app in system settings!" class="Box Icon">&#xf30f;</div
+><div PL-Title="Database Backup" PL-Bin="backup.bin" PL-Ver="v1.0 - By Leeful" LoadedMSG="Backup DB Loaded !!!" PL-Desc="Create a backup of important database files.<br><br>A backup of your app databases will be created and saved internally on your PS4 HDD and also to USB if a USB drive is inserted." class="Box Icon">&#xf56e;</div
+><div PL-Title="Database Restore" PL-Bin="restore.bin" PL-Ver="v1.0 - By Leeful" LoadedMSG="restore DB Loaded !!!" PL-Desc="Restore a backup of the database files created by 'Database Backup'<br><br>The backup will be restored from either the Internal HDD or from USB if a USB drive is inserted.<br>If a USB drive is inserted, the backup on the USB will be the one used to restore." class="Box Icon">&#xf56f;</div
+></div>
+
+<div id=DumperMenu class=MenuClass style=display:none>
+<div  PL-Title="Game Dumper Menu"           PL-Bin="INFO"           PL-Ver="Menu Info:"                                                       PL-Desc="Contains payloads to dump games from your PS4 <br>so that you can then build your own fake packages that you can install." class="Box Icon">&#xf30f;</div
+><div PL-Title="Dump Game & Update"         PL-Bin="gamedumper.bin" PL-Ver="v1.9 - Original Version By xVortex / 9.00 Port and Mod By Leeful" LoadedMSG="Games Dumper Loaded!!! Load your game!!!" PL-Desc="Dump your games or apps to a USB drive to be able to create fpkg files.<br><br>This payload will dump your game and game update (if there is one) into two seperate folders on your USB drive.<br>No config file is needed with this payload!" class="Box Icon">&#xf1b3;</div
+><div PL-Title="Dump Game Pkg"              PL-Bin="pkgbackup.bin"  PL-Ver="v1.1 - Original Version By ()" LoadedMSG="Backup Pkg v1.1 Loaded!!! Load your game!!!" PL-Desc="Dump your games or apps to pkg files in USB drive .<br><br>This payload will dump just your game on your USB drive.<br><br>No config file is needed with this payload!" class="Box Icon">&#xf1b2;</div
+></div>
+
+</div>
+
+<div id=navFix1 tabindex="6"></div>
+<div id=Title class=Title></div>
+<div id=InfoBox style=display:none><div id=InfoTitle></div><div id=InfoVerAuth></div><div id=InfoDesc></div></div>
+<div id=FanTemp class=Info1></div>
+    <div id="notify" style="display: none;">
+        <p id="log"></p>
+    </div>
+<select class="multiOPTIONS" id="multiGH" disabled="true" onChange="setGHver()" style="position:fixed;bottom:0px;opacity:0;">
+<option value="">Select A Version From The List Below:</option>
+<option value="v2.2.5b7">v2.2.5b7 - 27 Oct 2022 *Latest Beta*</option>
+</select>
+
+<select class="multiOPTIONS" id="autoGH" disabled="true" onChange="setAutoGH()" style="position:fixed;bottom:0px;opacity:0;">
+<option value="">Select An Option Below:</option>
+<option value="ON">Auto Load GoldHEN After Kernel Exploit = "ON"</option>
+<option value="OFF">Auto Load GoldHEN After Kernel Exploit = "OFF"</option>
+</select>
+
+<script>
+var SS=sessionStorage;var LS=localStorage;var CC=createCookie;var RC=readCookie;
+
+function createCookie(name,value,days){if(days){var date=new Date();date.setTime(date.getTime()+(days*24*60*60*1000));var expires="; expires="+date.toGMTString();}else expires="";document.cookie=name+"="+value+expires;}
+function readCookie(name){var nameEQ=name+"=";var ca=document.cookie.split(';');for(var i=0;i<ca.length;i++){var c=ca[i];while(c.charAt(0)==' ') c=c.substring(1,c.length);if(c.indexOf(nameEQ)==0) return c.substring(nameEQ.length,c.length);} return null;}
+
+if (sessionStorage.length == 0) {
+ MenuNumber=1;
+ SS.MenuNumber=MenuNumber;
+ SS.ItemNum=2;
+ SS.MenuPos= -40;
+ MenuContainer.children[MenuNumber-1].setAttribute('id','TargetMenu');
+ TargetMenu.children[SS.ItemNum-1].className="SelectedItem Icon";
+ MenuStatus=1;
+ Loaded=0;
+ SS.ThisIsFanControl=0;
+ SS.ThisIsFwSpoofer=0;
+}
+else {
+MainMenu.children[1].setAttribute('PL-Title', 'GoldHEN '+LS.GHver);
+MainMenu.children[1].setAttribute('PL-Ver', LS.GHver+' By SiSTRo');
+MainMenu.children[1].setAttribute('PL-Bin', 'GoldHEN'+LS.GHver+'.bin');
+MenuNumber=SS.MenuNumber;
+MenuContainer.children[MenuNumber-1].setAttribute('id','TargetMenu');
+TargetMenu.children[SS.ItemNum-1].className="SelectedItem Icon";
+MenuStatus=1;
+Loaded=0;
+SS.ThisIsFanControl=0;
+SS.ThisIsFwSpoofer=0;
+}
+
+FWver.innerHTML=UA;
+passCounter.innerHTML=LS.passcount;
+failCounter.innerHTML=LS.failcount;
+aGHyn.innerHTML = LS.autoGH;
+
+function openAutoGH(){
+ document.getElementById('autoGH').disabled = false;
+ var evt = autoGH.ownerDocument.createEvent('MouseEvents');
+ evt.initMouseEvent('mousedown',{bubbles:true});
+ autoGH.dispatchEvent(evt);
+ document.getElementById('autoGH').disabled = true;
+}
+
+function setAutoGH(){
+ LS.autoGH = autoGH.value;
+ aGHyn.innerHTML=LS.autoGH;
+}
+
+function openGHverSelection(){
+ document.getElementById('multiGH').disabled = false;
+ var evt = multiGH.ownerDocument.createEvent('MouseEvents');
+ evt.initMouseEvent('mousedown',{bubbles:true});
+ multiGH.dispatchEvent(evt);
+ document.getElementById('multiGH').disabled = true;
+}
+
+function setGHver(){
+ LS.GHver = multiGH.value;
+ updateGHver();
+}
+
+function updateGHver(){
+ if (TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Title').includes('GoldHEN')){
+  TargetMenu.children[SS.ItemNum-1].setAttribute('PL-Title', 'GoldHEN '+LS.GHver);
+  TargetMenu.children[SS.ItemNum-1].setAttribute('PL-Ver', LS.GHver+' By SiSTRo');
+  TargetMenu.children[SS.ItemNum-1].setAttribute('PL-Bin', 'GoldHEN'+LS.GHver+'.bin');
+  ChangeText("GoldHEN "+multiGH.value);
+  IBT(TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Title'));IBV(TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Ver'));
+ }
+}
+
+function UpdateSelectMenu(){
+ var x=TargetMenu.childElementCount;for(i=0;i<x;i++){TargetMenu.children[i].className="Box Icon";}
+ TargetMenu.children[SS.ItemNum-1].className="SelectedItem2 Icon";
+ ShowMenuInfo();SS.MenuNumber=MenuNumber;
+}
+
+function UpdateMenu(){
+ setTimeout(function(){
+  if (MenuStatus==1){TargetMenu.children[SS.ItemNum-1].className="SelectedItem Icon";}
+  else {TargetMenu.children[SS.ItemNum-1].className="SelectedItem2 Icon";}
+ },0);
+
+ if (MenuStatus == 1){TargetMenu.children[SS.ItemNum-1].className = "SelectedItemAnim Icon";
+ TargetMenu.style.left=SS.MenuPos+'px';}
+
+ UpdateTitle();
+ ShowInfo();
+
+ var x = TargetMenu.childElementCount;for (i=0; i<x; i++){TargetMenu.children[i].className="Box Icon";}
+}
+
+function UpdateTitle(){
+ Title.className = "TitleAnim";
+ setTimeout(function(){ChangeText(TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Title'));},100);
+ setTimeout(function(){Title.className="Title";},100);
+ setTimeout(function(){if (TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Title')=='Fan Control'){ShowFanTemp();}else{HideFanTemp();}},100);
+}
+
+function HideTitle(){
+ Title.className = "NoTitle";
+}
+
+function ChangeText(text){Title.innerHTML = text;}
+function ChangeInfoBoxTitle(text){InfoTitle.innerHTML = text;}
+function ChangeInfoBoxVer(text){InfoVerAuth.innerHTML = text;}
+function ChangeInfoBoxDesc(text){InfoDesc.innerHTML = text;}
+IBT = ChangeInfoBoxTitle;IBV = ChangeInfoBoxVer;IBD = ChangeInfoBoxDesc;
+
+function allset2(){
+ ChangeText(TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Title')+" Loading...");
+ setTimeout(function(){ChangeText(TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Title')+" Loaded");},4000); 
+}
+
+function allset3(){
+	    document.getElementById('notify').style.display = ''
+	    document.getElementById('notify').className = 'notification'
+            setTimeout(function(){document.getElementById('log').innerHTML ='<h1 style=color:#ebfa89>*Loading Payload...</h1>'; }, 50);
+            setTimeout(function(){document.getElementById("log").innerHTML="<h1 style=color:#ebfa89>"+LoadedMSG+"</h1>"; }, 800);
+            setTimeout(ani2, 4000);
+}
+
+function LoadFromGHBLS(PLfile){
+ var req=new XMLHttpRequest();
+ req.open("GET","https://127.0.0.1:9090/status");
+ req.send();
+ req.onerror=function(){alert("Cannot Load Payload Because The BinLoader Server Is Not Running");return;};
+ req.onload=function(){
+  var responseJson=JSON.parse(req.responseText);
+  if(responseJson.status=="ready"){
+   getPayload(PLfile,function(req){if((req.status===200||req.status===304)&&req.response){sendPayload("https://127.0.0.1:9090",req.response);}});
+  }
+  else{alert("Cannot Load Payload Because The BinLoader Server Is Busy");return;}
+ };
+ var getPayload=function(pl,onLoadEndCallback){
+  var req=new XMLHttpRequest();
+  req.open('GET',pl);
+  req.send();
+  req.responseType="arraybuffer";
+  req.onload=function(event){if(onLoadEndCallback)onLoadEndCallback(req,event);};
+ };
+ var sendPayload=function(url,data,onLoadEndCallback){
+  var req=new XMLHttpRequest();
+  req.open("POST",url,true);
+  req.send(data);req.onload=function(event){allset2();if(onLoadEndCallback)onLoadEndCallback(req,event);};
+ };
+}
+
+function LoadPL(){
+ if(sessionStorage.ghbls == "yes"){
+  PLfile=TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Bin');
+  LoadFromGHBLS(PLfile);
+ }
+ else{
+  if (Loaded==0 && TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Bin')!="INFO"){
+   Payload=TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Title'); 
+   PLfile=TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Bin');
+   if (Payload=='Bin Loader'){
+    top.runBinLoader();
+   }
+   else {
+    LoadedMSG=Payload+" Loaded";
+    getPL(PLfile);
+   }
+  } 
+ } 
+}
+
+function getPL(PLfile){
+ var req = new XMLHttpRequest();
+ req.responseType = "arraybuffer";
+ req.open('GET',PLfile);
+ req.send();
+ req.onreadystatechange = function () {
+  if (req.readyState == 4) {
+   PLD = req.response;
+   top.loadPayload(PLD);
+  }
+ };
+}
+
+function PLdone(){
+ if (TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Title').includes('GoldHEN')){
+  ChangeText(TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Title')+" Loading...");
+  setTimeout(function(){ChangeText(TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Title')+" Loaded");},1500); 
+  setTimeout(GHBLScheck,2000);
+ }
+ else {
+  ChangeText(TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Title')+" Loading...");
+  setTimeout(function(){ChangeText(TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Title')+" Loaded");},1500); 
+ }
+}
+
+function ShowMenuInfo(){
+ IBT(TargetMenu.children[0].getAttribute('PL-Title'));IBV(TargetMenu.children[0].getAttribute('PL-Ver'));IBD(TargetMenu.children[0].getAttribute('PL-Desc'));
+}
+
+function ShowInfo(){
+ if (Title.innerHTML=='Fan Control'){};if (Title.innerHTML=='Firmware Spoofer'){};
+ InfoBox.style.display='block';
+ IBT(TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Title'));IBV(TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Ver'));
+ IBD(TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Desc'));
+}
+ShowInfo();
+
+function HideLoaderBox(){
+ Loaded='1'; setTimeout(function(){var x=document.querySelectorAll(".SelectedItem");var i;for(i=0;i < x.length;i++){x[i].className="InfoIcon Icon";}},1500);
+}
+
+function SelectionMenuOFF(){
+ var x=MenuSelection.childElementCount;for(i=0;i<x;i++){MenuSelection.children[i].removeAttribute("tabindex");}
+}
+
+function SelectionMenuON(){
+ SelectionMenuOFF();
+ function AllON(){var x=MenuSelection.childElementCount;for(i=0;i<x;i++){MenuSelection.children[i].setAttribute("tabindex","1");}}
+ MenuSelection.children[MenuNumber-1].setAttribute("tabindex","1");
+ setTimeout(AllON,100);
+}
+
+function SetMenuButton(){
+ var x=MenuSelection.childElementCount;for(i=0;i<x;i++){MenuSelection.children[i].className="But0";}
+ MenuSelection.children[MenuNumber-1].className="But2";
+}
+
+function SwapMenuR(){
+ SS.ItemNum=2;SS.MenuPos=-40;
+ MenuNumber=parseInt(SS.MenuNumber)+1;
+ TargetMenu.style="display:none";
+ var x=MenuContainer.childElementCount;for(i=0;i<x;i++){MenuContainer.children[i].id="other";}
+ MenuContainer.children[MenuNumber-1].setAttribute('id','TargetMenu');SetMenuButton();
+ UpdateSelectMenu();TargetMenu.style="display:block";TargetMenu.style.left="-40px";
+}
+
+function SwapMenuL(){
+ SS.ItemNum=2;SS.MenuPos=-40;
+ MenuNumber=parseInt(SS.MenuNumber)-1;
+ TargetMenu.style="display:none";
+ var x=MenuContainer.childElementCount;for(i=0;i<x;i++){MenuContainer.children[i].id="other";}
+ MenuContainer.children[MenuNumber-1].setAttribute('id','TargetMenu');SetMenuButton();
+ UpdateSelectMenu();TargetMenu.style="display:block";TargetMenu.style.left="-40px";
+}
+
+var x=MenuContainer.childElementCount;for(i=0;i<x;i++){MenuContainer.children[i].style="display:none";}
+UpdateTitle();
+SetMenuButton();
+TargetMenu.style="display:block";
+TargetMenu.children[SS.ItemNum-1].className="SelectedItem Icon";
+TargetMenu.style.left=SS.MenuPos+'px';
+
+updateGHver();
+
+top.window.onkeyup = checkKeyUp;
+window.onkeyup = checkKeyUp;
+function checkKeyUp(e){
+e=e || window.event;
+     if (e.keyCode=='117' && Loaded==0) {}
+else if (e.keyCode=='116' && Loaded==0) {}
+}
+
+top.window.onkeydown = checkKeyDown;
+window.onkeydown = checkKeyDown;
+function checkKeyDown(e){
+e=e || window.event;
+var MoveMenu = 110; 
+     if (e.keyCode=='117' && Loaded==0) {if (TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Title').includes('GoldHEN'))openGHverSelection();}
+else if (e.keyCode=='116' && Loaded==0) {if (TargetMenu.children[SS.ItemNum-1].getAttribute('PL-Title').includes('GoldHEN'))openAutoGH();}
+
+else if (SS.ThisIsFanControl != 0 || SS.ThisIsFwSpoofer != 0){}
+
+else if (e.keyCode=='38' && MenuStatus == 1 && Loaded==0) {MenuStatus=0;SelectionMenuON();
+TargetMenu.children[SS.ItemNum-1].className="SelectedItem2 Icon";HideTitle();UpdateSelectMenu();ShowMenuInfo();HideFanTemp();}
+
+else if (e.keyCode=='40' && MenuStatus == 0 && Loaded==0) {MenuStatus=1;SelectionMenuOFF();
+TargetMenu.children[SS.ItemNum-1].className="SelectedItem Icon";UpdateTitle();ShowInfo();}
+
+else if (e.keyCode=='37' && Loaded==0 && MenuStatus==0 && MenuNumber-1 >= 1 && MenuNumber <= MenuSelection.childElementCount){
+SwapMenuL();}
+
+else if (e.keyCode=='39' && Loaded==0 && MenuStatus==0 && MenuNumber-1 >= 0 && MenuNumber < MenuSelection.childElementCount){
+SwapMenuR();}
+
+else if (e.keyCode=='37' && MenuStatus==1 && SS.ItemNum-1 >= 1 && SS.ItemNum <= TargetMenu.childElementCount){
+SS.MenuPos=parseInt(SS.MenuPos)+MoveMenu;SS.ItemNum=parseInt(SS.ItemNum)-1;SelectionMenuOFF();UpdateMenu();}
+
+else if (e.keyCode=='39' && MenuStatus==1 && SS.ItemNum-1 >= 0 && SS.ItemNum < TargetMenu.childElementCount){
+SS.MenuPos=parseInt(SS.MenuPos)-MoveMenu;SS.ItemNum=parseInt(SS.ItemNum)+1;SelectionMenuOFF();UpdateMenu();}
+
+}
+
+</script>
+</body>
+</html>
