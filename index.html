@@ -36,7 +36,7 @@ function checkGHBLS(){
 
 function runJB(){
  ScrOverlay.style.display="block";CacheProgress.style.display="none";CacheProgress2.style.display="none";cacheUPDtxt.innerHTML="Running Webkit Exploit, Please Wait ...";
- setTimeout(webkitExploit,1000);
+ setTimeout(webkitExploit,50);
 }
 
 function go(){
@@ -50,7 +50,7 @@ function go(){
 </script>
 </head>
 <body onload="go()">
-<div id=ScrOverlay class=cacheUPDbg><pre id=cacheUPDtxt class=cacheUPDtext></pre><div id=CacheProgress><div id=CacheBar class=CacheBar></div></div><div id=CacheProgress2><div id=CacheBar2 class=CacheBar></div></div></div>
+<div id=ScrOverlay class=cacheUPDbg><pre id=cacheUPDtxt class=cacheUPDtext></pre><div id=CacheProgress><div id=CacheBar class=CacheBar></div></div></div>
 <div id=Loader class=Loader></div>
 <script>
 function JBpass(){
