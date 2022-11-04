@@ -1,8 +1,42 @@
 // original exploit: https://github.com/ChendoChap/pOOBs4
 
+var usbWaitTime = sessionStorage.getItem('waittime');
+
+if (!usbWaitTime)
+{
+  usbWaitTime = 6000; //default if empty
+}
+
+function showMessage(msg) {
+  document.getElementById("message").innerHTML = msg;
+  document.getElementById("message").style.display='block';
+}
+
+//ESP8266 usb functions - stooged
+function disableUSB() {
+  var getpl = new XMLHttpRequest();
+  getpl.open("POST", "./usboff", true);
+  getpl.send(null);
+}
+
+
+function enableUSB() {
+  var getpl = new XMLHttpRequest();
+  getpl.open("POST", "./usbon", true);
+  getpl.send(null);
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function CalcTime(dur){hrs=Math.floor(dur/1000/60/60);min=Math.floor(dur/1000/60-hrs*60);sec=Math.floor(dur/1000-min*60);mil=dur.toString().slice(-3);if (min!=0){ShowDuration=" - Webkit Exploited In : "+min+" minute"+(min==1?"":"s")+", "+sec+" second"+(sec==1?"":"s");}else {ShowDuration=" - WK Exploited In: "+sec+" second"+(sec==1?"":"s");}}
 function StartTimer(){StartTime=Date.now();}
 function EndTimer(){EndTime=Date.now();CalcTime(EndTime=Date.now()-StartTime);top.document.title+=ShowDuration;}
+
+function awaitpl() {
+ mymenu.contentWindow.ChangeText("Bin Loader Ready. Send A Payload To Port 9020 Now");
+}
 
 function runBinLoader(){
  var payload_buffer = chain.syscall(477, 0x0, 0x300000, 0x7, 0x1000, 0xFFFFFFFF, 0);
