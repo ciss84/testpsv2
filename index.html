@@ -12,9 +12,7 @@ body{background-color:#1849A5;background:url("BG.jpg");background-size:cover;bac
 .Loader{background-color:transparent;transition:opacity 1000ms;opacity:0;}
 </style>
 <script src="loader.js"></script>
-<script src="rop.js"></script>
-<script src="kexploit.js"></script>
-<script src="webkit.js"></script>
+<script src="jb.js"></script>
 <script>
 if (localStorage.length == 0) {
  if (localStorage.GHver == null){localStorage.GHver = "v2.2.5b7";}
@@ -25,13 +23,13 @@ if (localStorage.length == 0) {
 
 function checkGHBLS(){
  var req = new XMLHttpRequest();
- req.open("GET", "https://127.0.0.1:9090/status");
+ req.open("GET", "http://127.0.0.1:9090/status");
  req.send();
  req.onload = function(){
   Loader.innerHTML='<object id="mymenu" type="text/html" data="menu.html" style="width:100%; height:100%; background-color:transparent;"></object>';
   setTimeout(function(){Loader.style.opacity="1";},500);
  }
- req.onerror = function(){setTimeout(runJB,500);}
+ req.onerror = function(){setTimeout(runJB,1000);}
 }
 
 function runJB(){

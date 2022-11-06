@@ -282,7 +282,7 @@ if (UA!="9.00")alert("This Is For PS4 FW9.00 Only!");
 
 function GHBLScheck(){
  var req = new XMLHttpRequest();
- req.open("GET", "https://127.0.0.1:9090/status");
+ req.open("GET", "http://127.0.0.1:9090/status");
  req.send();
  req.onload = function(){sessionStorage.ghbls = "yes";GHBLS.innerHTML="GoldHEN BinLoader Server";}
  req.onerror = function(){sessionStorage.ghbls = "no";GHBLS.innerHTML="Webkit";}
@@ -296,7 +296,9 @@ GHBLScheck();
 
 <div id=ScrOverlay class=cacheUPDbg><pre id=cacheUPDtxt class=cacheUPDtext></pre><div id=CacheProgress><div id=CacheBar></div></div></div>
 <div id=Loader class=Loader></div>
-
+    <div id="notify" style="display: none;">
+        <p id="log"></p>
+    </div>
 <div id=MenuSelection onmouseenter=SetMenuButton()>
 <div class=but2> Main </div>&nbsp;&nbsp;
 <div class=but0> Game Mods </div>&nbsp;&nbsp;
@@ -346,9 +348,7 @@ GHBLScheck();
 <div id=Title class=Title></div>
 <div id=InfoBox style=display:none><div id=InfoTitle></div><div id=InfoVerAuth></div><div id=InfoDesc></div></div>
 <div id=FanTemp class=Info1></div>
-    <div id="notify" style="display: none;">
-        <p id="log"></p>
-    </div>
+
 <select class="multiOPTIONS" id="multiGH" disabled="true" onChange="setGHver()" style="position:fixed;bottom:0px;opacity:0;">
 <option value="">Select A Version From The List Below:</option>
 <option value="v2.2.5b7">v2.2.5b7 - 27 Oct 2022 *Latest Beta*</option>
@@ -485,13 +485,13 @@ function allset3(){
 
 function LoadFromGHBLS(PLfile){
  var req=new XMLHttpRequest();
- req.open("GET","https://127.0.0.1:9090/status");
+ req.open("GET","http://127.0.0.1:9090/status");
  req.send();
  req.onerror=function(){alert("Cannot Load Payload Because The BinLoader Server Is Not Running");return;};
  req.onload=function(){
   var responseJson=JSON.parse(req.responseText);
   if(responseJson.status=="ready"){
-   getPayload(PLfile,function(req){if((req.status===200||req.status===304)&&req.response){sendPayload("https://127.0.0.1:9090",req.response);}});
+   getPayload(PLfile,function(req){if((req.status===200||req.status===304)&&req.response){sendPayload("http://127.0.0.1:9090",req.response);}});
   }
   else{alert("Cannot Load Payload Because The BinLoader Server Is Busy");return;}
  };
