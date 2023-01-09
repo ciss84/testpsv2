@@ -270,7 +270,8 @@ color: white;
 <script>
 UA=navigator.userAgent.substring(navigator.userAgent.indexOf("6.72 (") + 28,navigator.userAgent.indexOf(") Apple"));
 if (UA=="layStation 4/9.00")UA="9.00";
-if (UA!="9.00")alert("This Is For PS4 FW9.00 Only!");
+if (UA=="layStation 4/9.50")UA="9.50";
+if (UA!="9.00" && UA!="9.50")alert("This Is For PS4 FW9.00 Only!");
 
         function ani2() {
             document.getElementById('notify').className = 'notification2'
